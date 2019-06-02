@@ -15,12 +15,12 @@ class CreateKeuangan extends Migration
     {
         Schema::create('keuangan', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tabungan_id');
-            $table->integer('transaksi_id');
+            $table->integer('tabungan_id')->nullable();
+            $table->integer('transaksi_id')->nullable();
             $table->enum('tipe', ['in','out']);
             $table->double('jumlah');
             $table->double('total_kas');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

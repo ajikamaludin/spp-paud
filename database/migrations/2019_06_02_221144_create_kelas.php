@@ -15,7 +15,7 @@ class CreateKelas extends Migration
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('periode_id');
+            $table->integer('periode_id')->nullable();
             $table->string('nama');
             $table->timestamps();
             $table->softDeletes();

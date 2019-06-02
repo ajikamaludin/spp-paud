@@ -17,8 +17,8 @@ class CreateTagihan extends Migration
             $table->bigIncrements('id');
             $table->string('nama');
             $table->double('jumlah');
-            $table->boolean('wajib_semua');
-            $table->integer('kelas_id');
+            $table->boolean('wajib_semua')->nullable();
+            $table->integer('kelas_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

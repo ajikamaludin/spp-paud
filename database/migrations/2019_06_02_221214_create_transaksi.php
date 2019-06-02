@@ -17,9 +17,9 @@ class CreateTransaksi extends Migration
             $table->bigIncrements('id');
             $table->integer('siswa_id');
             $table->integer('tagihan_id');
-            $table->integer('diskon');
-            $table->boolean('is_lunas');
-            $table->text('keterangan');
+            $table->integer('diskon')->nullable();
+            $table->boolean('is_lunas')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

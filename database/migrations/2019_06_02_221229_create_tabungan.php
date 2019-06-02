@@ -19,7 +19,7 @@ class CreateTabungan extends Migration
             $table->enum('tipe', ['in','out']);
             $table->double('jumlah');
             $table->double('saldo');
-            $table->text('keperluan');
+            $table->text('keperluan')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
