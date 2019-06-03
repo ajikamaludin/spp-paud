@@ -49,7 +49,7 @@ class PeriodeController extends Controller
             $periode->is_active = 0;
         }
 
-        if($periode->save()){
+        if(!$periode->save()){
             return redirect()->route('periode.index')->with([
                 'type' => 'success',
                 'msg' => 'Periode baru ditambahkan'

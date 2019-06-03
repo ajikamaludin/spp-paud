@@ -18,6 +18,11 @@
                 </div>
                 @if(session()->has('msg'))
                 <div class="alert alert-{{ session()->get('type') }}" id="message" style="border-radius: 0px !important">
+                    @if(session()->get('type') == 'success')
+                        <i class="fe fe-check mr-2" aria-hidden="true"></i>
+                    @else
+                        <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> 
+                    @endif
                         {{ session()->get('msg') }}
                 </div>
                 @endif
