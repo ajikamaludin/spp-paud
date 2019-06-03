@@ -112,6 +112,5 @@
 
         });
     });
-
 </script>
 @endsection

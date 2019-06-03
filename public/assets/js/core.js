@@ -104,4 +104,8 @@ $(document).ready(function() {
       });
     });
   }
+
+  setTimeout(function() {
+    $("#message").hide('blind', '', 500)
+  }, 3000);
 });

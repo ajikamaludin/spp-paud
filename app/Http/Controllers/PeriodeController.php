@@ -36,7 +36,6 @@ class PeriodeController extends Controller
      */
     public function store(Request $request)
     {
-        //validate
         $request->validate([
             'nama' => 'required|max:255',
             'tgl_mulai' => 'required|date|before:'.$request->tgl_selesai,
@@ -44,9 +43,22 @@ class PeriodeController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        //input
-        if(Periode::create($request->input())){
+        $periode = Periode::make($request->input());
 
+        if($request->is_active == null){
+            $periode->is_active = 0;
+        }
+
+        if($periode->save()){
+            return redirect()->route('periode.index')->with([
+                'type' => 'success',
+                'msg' => 'Periode baru ditambahkan'
+            ]);
+        }else{
+            return redirect()->route('periode.index')->with([
+                'type' => 'danger',
+                'msg' => 'Err.., Terjadi Kesalahan'
+            ]);
         }
     }
 
