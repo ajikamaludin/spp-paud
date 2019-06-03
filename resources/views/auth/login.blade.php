@@ -55,7 +55,7 @@
                                 <div class="card-title"><h3>Masuk</h3></div>
                                 <div class="form-group">
                                     <label class="form-label">Email</label>
-                                    <input type="email" name="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Masukan email">
+									<input type="email" name="email" class="form-control {{ ($errors->has('email')) ? 'is-invalid' : '' }}" placeholder="Masukan email" value="{{ old('email') }}">
                                     @if($errors->has('email'))
                                         <small class="form-text invalid-feedback" style="display: block !important">{{ $errors->first('email') }}</small>
                                     @endif

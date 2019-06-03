@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -15,7 +15,7 @@
 	<meta name="HandheldFriendly" content="True">
 	<meta name="MobileOptimized" content="320">
 	<link rel="icon" href="{{ asset('favicon.ico')}} " type="image/x-icon" />
-	<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico')}}" />
 	<!-- Generated: 2018-04-16 09:29:05 +0200 -->
 	<title>@yield('site-name') | @yield('page-name')</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,18 +33,15 @@
 	<!-- c3.js Charts Plugin -->
 	<link href="{{ asset('assets/plugins/charts-c3/plugin.css')}}" rel="stylesheet" />
 	<script src="{{ asset('assets/plugins/charts-c3/plugin.js')}}"></script>
-	<!-- Google Maps Plugin -->
-	<link href="{{ asset('assets/plugins/maps-google/plugin.css')}}" rel="stylesheet" />
-	<script src="{{ asset('assets/plugins/maps-google/plugin.js')}}"></script>
-	<!-- Input Mask Plugin -->
-	<script src="{{ asset('assets/plugins/input-mask/plugin.js')}}"></script>
-	<!-- Custom CSS -->
+	<!-- datepicker -->
+	<link href="{{ asset('assets/plugins/datepicker/datepicker.css')}}" rel="stylesheet" />
+	<!-- requirejs and Custom CSS -->
 	@yield('css')
 </head>
 
 <body class="">
 	<div class="page">
-		<div class="page-main">
+		<div class="flex-fill">
 			<div class="header py-4">
 				<div class="container">
 					<div class="d-flex">
@@ -63,16 +60,16 @@
 								</a>
 								<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-user"></i> Profile
+										<i class="dropdown-icon fe fe-user"></i> Profil
 									</a>
 									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-settings"></i> Settings
+										<i class="dropdown-icon fe fe-settings"></i> Pengaturan
 									</a>
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 										@csrf
 									</form>	
 									<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-										<i class="dropdown-icon fe fe-log-out"></i> Sign out
+										<i class="dropdown-icon fe fe-log-out"></i> Keluar
 									</a>
 								</div>
 							</div>
@@ -84,6 +81,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- start navbar -->
 			@include('shared.navbar')
 			<div class="my-3 my-md-5">
 				<div class="container">
@@ -102,6 +100,7 @@
 			</div>
 		</footer>
 	</div>
+	<!-- Custom JS -->
+	@yield('js')
 </body>
-@yield('js')
 </html>

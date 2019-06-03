@@ -15,6 +15,7 @@ class CreatePeriode extends Migration
     {
         Schema::create('periode', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('nama');
             $table->date('tgl_mulai');
             $table->date('tgl_selesai');
             $table->boolean('is_active');
