@@ -49,7 +49,7 @@ class PeriodeController extends Controller
             $periode->is_active = 0;
         }
 
-        if(!$periode->save()){
+        if($periode->save()){
             return redirect()->route('periode.index')->with([
                 'type' => 'success',
                 'msg' => 'Periode baru ditambahkan'
@@ -63,25 +63,14 @@ class PeriodeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Periode $periode)
     {
-        //
+        return view('periode.form', ['periode' => $periode]);
     }
 
     /**
@@ -91,9 +80,32 @@ class PeriodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Periode $periode)
     {
-        //
+        $request->validate([
+            'nama' => 'required|max:255',
+            'tgl_mulai' => 'required|date|before:'.$request->tgl_selesai,
+            'tgl_selesai' => 'required|date',
+            'is_active' => 'nullable|boolean',
+        ]);
+
+        $periode->fill($request->input());
+
+        if($request->is_active == null){
+            $periode->is_active = 0;
+        }
+
+        if($periode->save()){
+            return redirect()->route('periode.index')->with([
+                'type' => 'success',
+                'msg' => 'Periode berhasil diubah'
+            ]);
+        }else{
+            return redirect()->route('periode.index')->with([
+                'type' => 'danger',
+                'msg' => 'Err.., Terjadi Kesalahan'
+            ]);
+        }
     }
 
     /**
@@ -102,8 +114,18 @@ class PeriodeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Periode $periode)
     {
-        //
+        if($periode->delete()){
+            return redirect()->route('periode.index')->with([
+                'type' => 'success',
+                'msg' => 'Periode telah dihapus'
+            ]);
+        }else{
+            return redirect()->route('periode.index')->with([
+                'type' => 'danger',
+                'msg' => 'Err.., Terjadi Kesalahan'
+            ]);
+        }
     }
 }

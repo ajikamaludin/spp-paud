@@ -23,23 +23,23 @@
                             @csrf
                             <div class="form-group">
                                 <label class="form-label">Nama</label>
-                                <input type="text" class="form-control" name="nama" placeholder="Nama" required>
+                                <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{ isset($periode) ? $periode->nama : old('nama') }}" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Tanggal Mulai s/d Selesai</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">
-                                        <input type="text" class="form-control" name="tgl_mulai" data-toggle="datepicker" placeholder="Tanggal Mulai" required autocomplete="off">
+                                        <input type="text" class="form-control" name="tgl_mulai" data-toggle="datepicker" placeholder="Tanggal Mulai" required autocomplete="off" value="{{ isset($periode) ? $periode->tgl_mulai : old('tgl_mulai') }}">
                                     </div>
                                     <div class="col-6">
-                                        <input type="text" class="form-control" name="tgl_selesai" data-toggle="datepicker" placeholder="Tanggal Selesai" required autocomplete="off">
+                                        <input type="text" class="form-control" name="tgl_selesai" data-toggle="datepicker" placeholder="Tanggal Selesai" required autocomplete="off" value="{{ isset($periode) ? $periode->tgl_selesai : old('tgl_selesai') }}">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="form-label">Status</div>
                                 <label class="custom-switch">
-                                <input type="checkbox" name="is_active" value="1" class="custom-switch-input">
+                                <input type="checkbox" name="is_active" value="1" class="custom-switch-input" {{ isset($periode) ? ($periode->is_active ? 'checked' : '') : '' }}>
                                 <span class="custom-switch-indicator"></span>
                                 <span class="custom-switch-description">Aktif</span>
                                 </label>
@@ -63,7 +63,7 @@
         $(document).ready(function () {
 
             $('[data-toggle="datepicker"]').datepicker({
-                format: 'yyyy/MM/dd'
+                format: 'yyyy-MM-dd'
             });
 
         });

@@ -51,10 +51,12 @@
                                     {{ $item->tgl_selesai }}
                                 </td>
                                 <td>
-                                    {{ $item->is_active }}
+                                    @if($item->is_active)
+                                        <span class="tag tag-green">Aktif</span>
+                                    @endif
                                 </td>
                                 <td>
-                                    <a class="icon" href="javascript:void(0)" title="edit item">
+                                    <a class="icon" href="{{ route('periode.edit', $item->id) }}" title="edit item">
                                         <i class="fe fe-edit"></i>
                                     </a>
                                     <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}" title="delete item">

@@ -31,7 +31,6 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('periode','PeriodeController@index')->name('periode.index');
     Route::get('tambah-periode','PeriodeController@create')->name('periode.create');
     Route::post('tambah-periode', 'PeriodeController@store')->name('periode.store');
-    Route::get('periode/{periode}/detail', 'PeriodeController@show')->name('periode.show');
     Route::get('periode/{periode}/ubah', 'PeriodeController@edit')->name('periode.edit');
     Route::post('periode/{periode}/ubah','PeriodeController@update')->name('periode.update');
     Route::post('periode/{periode}/hapus', 'PeriodeController@destroy')->name('periode.destroy');
