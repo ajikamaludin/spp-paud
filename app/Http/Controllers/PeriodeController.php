@@ -52,7 +52,7 @@ class PeriodeController extends Controller
         if($periode->save()){
             return redirect()->route('periode.index')->with([
                 'type' => 'success',
-                'msg' => 'Periode baru ditambahkan'
+                'msg' => 'Periode ditambahkan'
             ]);
         }else{
             return redirect()->route('periode.index')->with([
@@ -98,7 +98,7 @@ class PeriodeController extends Controller
         if($periode->save()){
             return redirect()->route('periode.index')->with([
                 'type' => 'success',
-                'msg' => 'Periode berhasil diubah'
+                'msg' => 'Periode diubah'
             ]);
         }else{
             return redirect()->route('periode.index')->with([
@@ -116,10 +116,16 @@ class PeriodeController extends Controller
      */
     public function destroy(Periode $periode)
     {
+        if($periode->kelas->count() != 0){
+            return redirect()->route('periode.index')->with([
+                'type' => 'danger',
+                'msg' => 'Tidak dapat menghapus periode yang memiliki kelas'
+            ]);
+        }
         if($periode->delete()){
             return redirect()->route('periode.index')->with([
                 'type' => 'success',
-                'msg' => 'Periode telah dihapus'
+                'msg' => 'Periode dihapus'
             ]);
         }else{
             return redirect()->route('periode.index')->with([

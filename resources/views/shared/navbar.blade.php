@@ -10,17 +10,17 @@
                     </li>
                     <li class="nav-item">
                         <a href="#!" class="nav-link {{ set_active(['transaksispp.*'], 'active') }}">
-                            <i class="fe fe-list"></i> Transaksi SPP
+                            <i class="fe fe-repeat"></i> Transaksi SPP
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#!" class="nav-link">
-                            <i class="fe fe-list"></i> Transaksi Tabungan
+                            <i class="fe fe-repeat"></i> Transaksi Tabungan
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#!" class="nav-link">
-                            <i class="fe fe-list"></i> Keuangan
+                            <i class="fe fe-repeat"></i> Keuangan
                         </a>
                     </li>
                     <li class="nav-item">
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#!" class="nav-link">
+                        <a href="{{ route('kelas.index') }}" class="nav-link {{ set_active(['kelas.*'], 'active') }}">
                             <i class="fe fe-box"></i>Kelas
                         </a>
                     </li>
@@ -43,6 +43,18 @@
                             <i class="fe fe-box"></i> Periode
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="#!" class="nav-link">
+                            <i class="fe fe-folder"></i> Kuitansi
+                        </a>
+                    </li>
+                    @if(Auth::user()->role == 'Admin')
+                    <li class="nav-item">
+                        <a href="#!" class="nav-link">
+                            <i class="fe fe-box"></i> Pengguna
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </div>

@@ -34,6 +34,14 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('periode/{periode}/ubah', 'PeriodeController@edit')->name('periode.edit');
     Route::post('periode/{periode}/ubah','PeriodeController@update')->name('periode.update');
     Route::post('periode/{periode}/hapus', 'PeriodeController@destroy')->name('periode.destroy');
+
+    //Kelas
+    Route::get('kelas','KelasController@index')->name('kelas.index');
+    Route::get('tambah-kelas','KelasController@create')->name('kelas.create');
+    Route::post('tambah-kelas', 'KelasController@store')->name('kelas.store');
+    Route::get('kelas/{kelas}/ubah', 'KelasController@edit')->name('kelas.edit');
+    Route::post('kelas/{kelas}/ubah','KelasController@update')->name('kelas.update');
+    Route::post('kelas/{kelas}/hapus', 'KelasController@destroy')->name('kelas.destroy');
 });
 
 

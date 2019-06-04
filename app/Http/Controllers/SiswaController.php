@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Siswa;
+use App\Models\Kelas;
+use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\SiswaExport;
+use App\Imports\SiswaImport;
+use Complex\Exception;
 
 class SiswaController extends Controller
 {
@@ -12,10 +18,17 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request) 
     {
-        $siswa = Siswa::paginate(1);
-        return view('siswa.index', ['siswa' => $siswa]);
+        $q = $request->get('q');
+        if($q == null){
+            $siswa = Siswa::orderBy('created_at','desc')->paginate(15);
+        }else{
+            $siswa = Siswa::where('nama','like','%'.$q.'%')->orderBy('created_at','desc')->paginate(15);
+        }
+        return view('siswa.index', [
+            'siswa' => $siswa->appends(Input::except('page'))
+        ]);
     }
 
     /**
@@ -25,7 +38,8 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('siswa.form');
+        $kelas = Kelas::all();
+        return view('siswa.form', ['kelas' => $kelas]);
     }
 
     /**
@@ -36,7 +50,35 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->input());
+        $request->validate([
+            'kelas_id' => 'required|numeric',
+            'nama' => 'required|max:255',
+            'tempat_lahir' => 'nullable|max:255',
+            'tanggal_lahir' => 'nullable|date',
+            'jenis_kelamin' => 'nullable|in:L,P',
+            'alamat' => 'nullable',
+            'nama_wali' => 'nullable|max:255',
+            'telp_wali' => 'nullable|numeric',
+            'is_yatim' => 'nullable|boolean',
+        ]);
+
+        $siswa = Siswa::make($request->input());
+
+        if($request->is_yatim != null){
+            $siswa->is_yatim = 1;
+        }
+
+        if($siswa->save()){
+            return redirect()->route('siswa.index')->with([
+                'type' => 'success',
+                'msg' => 'Siswa ditambahkan'
+            ]);
+        }else{
+            return redirect()->route('siswa.index')->with([
+                'type' => 'danger',
+                'msg' => 'Err.., Terjadi Kesalahan'
+            ]);
+        }
     }
 
     /**
@@ -45,7 +87,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Siswa $siswa)
     {
         //
     }
@@ -56,9 +98,13 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Siswa $siswa)
     {
-        //
+        $kelas = Kelas::all();
+        return view('siswa.form', [
+            'siswa' => $siswa,
+            'kelas' => $kelas
+        ]);
     }
 
     /**
@@ -68,9 +114,39 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Siswa $siswa)
     {
-        //
+        $request->validate([
+            'kelas_id' => 'required|numeric',
+            'nama' => 'required|max:255',
+            'tempat_lahir' => 'nullable|max:255',
+            'tanggal_lahir' => 'nullable|date',
+            'jenis_kelamin' => 'nullable|in:L,P',
+            'alamat' => 'nullable',
+            'nama_wali' => 'nullable|max:255',
+            'telp_wali' => 'nullable|numeric',
+            'is_yatim' => 'nullable|boolean',
+        ]);
+
+        $siswa = $siswa->fill($request->input());
+
+        if($request->is_yatim != null){
+            $siswa->is_yatim = 1;
+        }else{
+            $siswa->is_yatim = 0;
+        }
+
+        if($siswa->save()){
+            return redirect()->route('siswa.index')->with([
+                'type' => 'success',
+                'msg' => 'Siswa diubah'
+            ]);
+        }else{
+            return redirect()->route('siswa.index')->with([
+                'type' => 'danger',
+                'msg' => 'Err.., Terjadi Kesalahan'
+            ]);
+        }
     }
 
     /**
@@ -79,8 +155,51 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Siswa $siswa)
     {
-        //
+        return redirect()->route('siswa.index')->with([
+            'type' => 'danger',
+            'msg' => 'Err.., Belum dibikin cuy , cocokin sama tagihan dll dulu'
+        ]);
+    }
+
+    public function showFormImport()
+    {
+        return view('siswa.import');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required'
+        ]);
+
+        if($request->hasFile('file')){
+            $extensions = ["xls","xlsx","xlm","xla","xlc","xlt","xlw"];
+            $result = [$request->file('file')->getClientOriginalExtension()];
+
+            if(in_array($result[0], $extensions)){
+                Excel::import(new SiswaImport, $request->file('file'));
+                return redirect()->route('siswa.index')->with([
+                    'type' => 'success',
+                    'msg' => 'data berhasil di import'
+                ]);
+            }
+
+            return redirect()->route('siswa.index')->with([
+                'type' => 'danger',
+                'msg' => 'terjadi kesalahan : file error'
+            ]);
+        }
+
+        return redirect()->route('siswa.index')->with([
+            'type' => 'info',
+            'msg' => 'terjadi kesalahan : nofile'
+        ]);
+    }
+
+    public function export()
+    {
+        return Excel::download(new SiswaExport, 'siswa-'.now().'.xlsx');
     }
 }

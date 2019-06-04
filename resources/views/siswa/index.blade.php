@@ -10,10 +10,13 @@
         </h1>
         <div class="page-options d-flex">
             <div class="input-icon ml-2">
-                <span class="input-icon-addon">
-                    <i class="fe fe-search"></i>
-                </span>
-                <input type="text" class="form-control w-10" placeholder="Cari Siswa">
+                
+                <form action="" method="GET">
+                    <span class="input-icon-addon">
+                        <i class="fe fe-search"></i>
+                    </span>
+                    <input type="text" class="form-control w-10" placeholder="Cari Siswa, masukan nama" name="q">
+                </form>
             </div>
         </div>
     </div>
@@ -24,15 +27,26 @@
                     <h3 class="card-title">@yield('page-name')</h3>
                     <a href="{{ route('siswa.create') }}" class="btn btn-outline-primary btn-sm ml-5">Tambah Siswa</a>
                     <div class="card-options">
-                        <a href="#" class="btn btn-primary btn-sm">Import</a>
-                        <a href="#" class="btn btn-secondary btn-sm ml-2">Export</a>
+                        <a href="{{ route('siswa.showimport') }}" class="btn btn-primary btn-sm">Import</a>
+                        <a href="{{ route('siswa.export') }}" class="btn btn-secondary btn-sm ml-2" download="true">Export</a>
                     </div>
                 </div>
+                @if(session()->has('msg'))
+                <div class="alert alert-{{ session()->get('type') }}" id="message" style="border-radius: 0px !important">
+                    @if(session()->get('type') == 'success')
+                        <i class="fe fe-check mr-2" aria-hidden="true"></i>
+                    @else
+                        <i class="fe fe-alert-triangle mr-2" aria-hidden="true"></i> 
+                    @endif
+                        {{ session()->get('msg') }}
+                </div>
+                @endif
                 <div class="table-responsive">
-                    <table class="table card-table table-vcenter text-nowrap">
+                    <table class="table card-table table-hover table-vcenter text-nowrap">
                         <thead>
                         <tr>
                             <th class="w-1">No.</th>
+                            <th>Kelas</th>
                             <th>Nama</th>
                             <th>Wali</th>
                             <th>Telp. Wali</th>
@@ -41,9 +55,10 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($siswa as $item)
+                        @foreach ($siswa as $index => $item)
                             <tr>
-                                <td><span class="text-muted">{{ $item->id }}</span></td>
+                                <td><span class="text-muted">{{ $index+1 }}</span></td>
+                                <td> {{ $item->kelas->nama }} </td>
                                 <td>
                                     <a href="" class="link-unmuted">
                                         {{ $item->nama }}
@@ -56,13 +71,15 @@
                                     {{ $item->telp_wali }}
                                 </td>
                                 <td>
-                                    {{ $item->is_yatim }}
+                                    @if($item->is_yatim)
+                                        <span class="tag tag-green">Yatim</span>
+                                    @endif
                                 </td>
-                                <td>
-                                    <a class="icon" href="javascript:void(0)" title="lihat detail">
+                                <td class="text-center">
+                                    <a class="icon" href="{{ route('siswa.show', $item->id) }}" title="lihat detail">
                                         <i class="fe fe-eye"></i>
                                     </a>
-                                    <a class="icon" href="javascript:void(0)" title="edit item">
+                                    <a class="icon" href="{{ route('siswa.edit', $item->id) }}" title="edit item">
                                         <i class="fe fe-edit"></i>
                                     </a>
                                     <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}" title="delete item">
