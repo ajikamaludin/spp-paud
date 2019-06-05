@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
-use Complex\Exception;
 
 class SiswaController extends Controller
 {
@@ -89,7 +88,7 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        //
+        //TODO: detail siswa with tagihan, lunas, is yatim is free all
     }
 
     /**
@@ -157,6 +156,7 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
+        //TODO: delete them all , 
         return redirect()->route('siswa.index')->with([
             'type' => 'danger',
             'msg' => 'Err.., Belum dibikin cuy , cocokin sama tagihan dll dulu'

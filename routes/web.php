@@ -42,6 +42,22 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('kelas/{kelas}/ubah', 'KelasController@edit')->name('kelas.edit');
     Route::post('kelas/{kelas}/ubah','KelasController@update')->name('kelas.update');
     Route::post('kelas/{kelas}/hapus', 'KelasController@destroy')->name('kelas.destroy');
+
+    //Tagihan
+    Route::get('tagihan','TagihanController@index')->name('tagihan.index');
+    Route::get('tambah-tagihan','TagihanController@create')->name('tagihan.create');
+    Route::post('tambah-tagihan', 'TagihanController@store')->name('tagihan.store');
+    Route::get('tagihan/{tagihan}/ubah', 'TagihanController@edit')->name('tagihan.edit');
+    Route::post('tagihan/{tagihan}/ubah','TagihanController@update')->name('tagihan.update');
+    Route::post('tagihan/{tagihan}/hapus', 'TagihanController@destroy')->name('tagihan.destroy');
+
+    //Users
+    Route::get('user','UserController@index')->name('user.index');
+    Route::get('tambah-user','UserController@create')->name('user.create');
+    Route::post('tambah-user', 'UserController@store')->name('user.store');
+    Route::get('user/{user}/ubah', 'UserController@edit')->name('user.edit');
+    Route::post('user/{user}/ubah','UserController@update')->name('user.update');
+    Route::post('user/{user}/hapus', 'UserController@destroy')->name('user.destroy');
 });
 
 

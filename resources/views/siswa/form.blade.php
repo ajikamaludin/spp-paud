@@ -25,7 +25,7 @@
                                 <label class="form-label">Kelas</label>
                                 <select id="select-beast" class="form-control custom-select" name="kelas_id">
                                     @foreach($kelas as $item)
-                                        <option value="{{ $item->id }}" {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>{{ $item->nama }}</option>
+                                        <option value="{{ $item->id }}" {{ isset($siswa) ? ($item->id == $siswa->kelas_id ? 'selected' : '') : '' }}>{{ $item->nama }} - {{ isset($item->periode) ? $item->periode->nama : '' }}</option>
                                     @endforeach
                                 </select>
                             </div>

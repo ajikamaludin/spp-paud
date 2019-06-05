@@ -15,7 +15,7 @@ class Tagihan extends Model
         'nama',
         'jumlah',
         'wajib_semua',
-        'hanya_kelas'
+        'kelas_id'
     ];
 
     public function transaksi(){
@@ -28,5 +28,13 @@ class Tagihan extends Model
 
     public function siswa(){
         return $this->belongsToMany('App\Models\Siswa','role');
+    }
+
+    public function kelas(){
+        return $this->hasOne('App\Models\Kelas','id','kelas_id');
+    }
+
+    public function getJumlahIdrAttribute(){
+        return "IDR. ".format_idr($this->jumlah);
     }
 }

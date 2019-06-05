@@ -24,7 +24,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#!" class="nav-link">
+                        <a href="{{ route('tagihan.index') }}" class="nav-link {{ set_active(['tagihan.*'], 'active') }}">
                             <i class="fe fe-box"></i> Tagihan
                         </a>
                     </li>
@@ -50,7 +50,7 @@
                     </li>
                     @if(Auth::user()->role == 'Admin')
                     <li class="nav-item">
-                        <a href="#!" class="nav-link">
+                            <a href="{{ route('user.index') }}" class="nav-link {{ set_active(['user.*'], 'active') }}">
                             <i class="fe fe-box"></i> Pengguna
                         </a>
                     </li>

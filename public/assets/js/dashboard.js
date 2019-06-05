@@ -20,7 +20,8 @@ paths: {
 'vector-map-world': 'assets/js/vendors/jquery-jvectormap-world-mill',
 'circle-progress': 'assets/js/vendors/circle-progress.min',
 'datepicker': 'assets/js/vendors/datepicker',
-'sweetalert' : 'assets/js/vendors/sweetalert.min'
+'sweetalert' : 'assets/js/vendors/sweetalert.min',
+'select2' : 'assets/js/vendors/select2.min'
 }
 });
 window.tabler = {
