@@ -17,7 +17,7 @@
 	<link rel="icon" href="{{ asset('favicon.ico')}} " type="image/x-icon" />
 	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico')}}" />
 	<!-- Generated: 2018-04-16 09:29:05 +0200 -->
-	<title>@yield('site-name') | @yield('page-name')</title>
+	<title>{{ $sitename }} | @yield('page-name')</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet"
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
@@ -46,7 +46,7 @@
 				<div class="container">
 					<div class="d-flex">
 						<a class="header-brand" href="#!">
-							<img src="{{ asset('tabler.svg')}}" class="header-brand-img" alt="tabler logo">
+							<img src="{{ asset('img/logo.jpg')}}" class="header-brand-img" alt="tabler logo">
 						</a>
 						<div class="d-flex order-lg-2 ml-auto">
 							<div class="dropdown">
@@ -59,10 +59,10 @@
 									</span>
 								</a>
 								<div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-									<a class="dropdown-item" href="#">
-										<i class="dropdown-icon fe fe-user"></i> Profil
+									<a class="dropdown-item" href="{{ route('user.edit', Auth::user()->id) }}">
+										<i class="dropdown-icon fe fe-user"></i> Ubah Profil
 									</a>
-									<a class="dropdown-item" href="#">
+									<a class="dropdown-item" href="{{ route('pengaturan.index') }}">
 										<i class="dropdown-icon fe fe-settings"></i> Pengaturan
 									</a>
 									<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

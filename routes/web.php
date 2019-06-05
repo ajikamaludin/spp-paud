@@ -14,6 +14,9 @@ Auth::routes();
 
 Route::middleware(['auth:web'])->group(function(){
     Route::get('/', 'HomeController@index')->name('web.index');
+    Route::get('pengaturan','HomeController@pengaturan')->name('pengaturan.index');
+    Route::get('ubah-pengaturan','HomeController@editPengaturan')->name('pengaturan.edit');
+    Route::post('ubah-pengaturan','HomeController@storePengaturan')->name('pengaturan.store');
 
     //Siswa
     Route::get('siswa','SiswaController@index')->name('siswa.index');
