@@ -65,6 +65,8 @@ class SiswaController extends Controller
 
         if($request->is_yatim != null){
             $siswa->is_yatim = 1;
+        }else{
+            $siswa->is_yatim = 0;
         }
 
         if($siswa->save()){

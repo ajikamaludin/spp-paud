@@ -17,7 +17,7 @@
                     <a href="{{ route('tagihan.create') }}" class="btn btn-outline-primary btn-sm ml-5">Tambah Tagihan</a>
                 </div>
                 @if(session()->has('msg'))
-                <div class="alert alert-{{ session()->get('type') }}" id="message" style="border-radius: 0px !important">
+                <div class="card-alert alert alert-{{ session()->get('type') }}" id="message" style="border-radius: 0px !important">
                     @if(session()->get('type') == 'success')
                         <i class="fe fe-check mr-2" aria-hidden="true"></i>
                     @else
@@ -28,7 +28,7 @@
                 @endif
                 <div class="table-responsive">
                     
-                    <table class="table card-table table-hover table-vcenter text-nowrap">
+                    <table class="table card-table table-hover table-vcenter text-wrap">
                         <thead>
                         <tr>
                             <th class="w-1">No.</th>
@@ -48,14 +48,14 @@
                                 <td>
                                     {{ $item->jumlah_idr }}
                                 </td>
-                                <td>
+                                <td style="max-width: 150px">
                                     @if($item->wajib_semua != null)
                                         <p>Wajib Semua</p>
                                     @elseif($item->kelas_id != null)
                                         <p>{{ $item->kelas->nama }} {{ isset($item->kelas->periode) ? ' - '.$item->kelas->periode->nama : '' }}</p>
                                     @elseif($item->wajib_semua == null && $item->kelas_id == null)
                                         @foreach ($item->role as $role)
-                                            {{ $role->siswa->nama }}{{ " (".$role->siswa->kelas->nama.")" }}, 
+                                            {{ $role->siswa->nama }}{{ " (".$role->siswa->kelas->nama.")" }},
                                         @endforeach
                                     @endif
                                 </td>

@@ -48,7 +48,7 @@
                             <i class="fe fe-folder"></i> Kuitansi
                         </a>
                     </li>
-                    @if(Auth::user()->role == 'Admin')
+                    @if(Auth::user()->role == 'Admin' || Auth::user()->role == 'SuperAdmin')
                     <li class="nav-item">
                             <a href="{{ route('user.index') }}" class="nav-link {{ set_active(['user.*'], 'active') }}">
                             <i class="fe fe-box"></i> Pengguna

@@ -17,7 +17,7 @@
                     <a href="{{ route('periode.create') }}" class="btn btn-outline-primary btn-sm ml-5">Tambah Periode</a>
                 </div>
                 @if(session()->has('msg'))
-                <div class="alert alert-{{ session()->get('type') }}" id="message" style="border-radius: 0px !important">
+                <div class="card-alert alert alert-{{ session()->get('type') }}" id="message" style="border-radius: 0px !important">
                     @if(session()->get('type') == 'success')
                         <i class="fe fe-check mr-2" aria-hidden="true"></i>
                     @else
