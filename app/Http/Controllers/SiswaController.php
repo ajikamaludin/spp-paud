@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
+use App\Models\Tabungan;
 
 class SiswaController extends Controller
 {
@@ -203,5 +204,25 @@ class SiswaController extends Controller
     public function export()
     {
         return Excel::download(new SiswaExport, 'siswa-'.now().'.xlsx');
+    }
+
+    //api saldo
+    public function getSaldo(Siswa $siswa)
+    {
+        if($siswa == null){
+            return response()->json(['msg' => 'siswa tidak ditemukan'], 404);
+        }
+        if($siswa->tabungan->count() == 0){
+            return response()->json(['saldo' => '0', 'sal' => '0']);
+        }
+
+        $input = Tabungan::where('tipe','in')->where('siswa_id',$siswa->id)->sum('jumlah');
+        $output = Tabungan::where('tipe','out')->where('siswa_id',$siswa->id)->sum('jumlah');
+        $verify = Tabungan::where('siswa_id', $siswa->id)->orderBy('created_at','desc')->first()->saldo;
+        if(($input - $output) == $verify){
+            return response()->json(['saldo' => $input - $output, 'sal' => format_idr($input - $output)]);
+        }else{
+            return response()->json(['saldo' => '0', 'sal' => 'invalid '.format_idr($input - $output)]);
+        }
     }
 }

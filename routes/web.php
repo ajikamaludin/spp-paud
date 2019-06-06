@@ -61,6 +61,12 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('user/{user}/ubah', 'UserController@edit')->name('user.edit');
     Route::post('user/{user}/ubah','UserController@update')->name('user.update');
     Route::post('user/{user}/hapus', 'UserController@destroy')->name('user.destroy');
+
+    //Menabung
+    Route::get('tabungan', 'TabunganController@index')->name('tabungan.index');
+    Route::post('menabung', 'TabunganController@menabung')->name('tabungan.store');
+    Route::get('export-mutasi', 'TabunganController@export')->name('tabungan.export');
+    Route::post('del-tabungan','TabunganController@destroy')->name('tabungan.destroy');
 });
 
 

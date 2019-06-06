@@ -14,8 +14,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#!" class="nav-link">
-                            <i class="fe fe-repeat"></i> Transaksi Tabungan
+                            <a href="{{ route('tabungan.index') }}" class="nav-link {{ set_active(['tabungan.*'], 'active') }}">
+                            <i class="fe fe-repeat"></i> Tabungan
                         </a>
                     </li>
                     <li class="nav-item">

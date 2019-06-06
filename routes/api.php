@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('saldo/{siswa?}','SiswaController@getSaldo')->name('api.getsaldo');
+Route::post('menabung/{siswa?}', 'TabunganController@menabung')->name('api.menabung');

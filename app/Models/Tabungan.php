@@ -20,7 +20,7 @@ class Tabungan extends Model
     ];
 
     public function siswa(){
-        return $this->belongsTo('App\Models\Siswa','id','siswa_id');
+        return $this->belongsTo('App\Models\Siswa','siswa_id','id');
     }
 
     public function keuangan(){
