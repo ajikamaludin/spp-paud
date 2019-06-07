@@ -25,14 +25,16 @@ class TabunganController extends Controller
     //api manabung
     public function menabung(Request $request, Siswa $siswa)
     {
+        $jumlah_bersih = preg_replace("/[,.]/", "", $request->jumlah);
         DB::beginTransaction();
         $tabungan = Tabungan::where('siswa_id', $siswa->id)->orderBy('created_at','desc')->first();
         if($tabungan != null){
-            $menabung = Tabungan::make($request->input());
+            $menabung = Tabungan::make($request->except('jumlah'));
+            $menabung->jumlah = $jumlah_bersih;
             if($request->tipe == 'in'){
-                $menabung->saldo = $request->jumlah + $tabungan->saldo;
+                $menabung->saldo = $jumlah_bersih + $tabungan->saldo;
             }else if($request->tipe == 'out'){
-                $menabung->saldo = $tabungan->saldo - $request->jumlah;
+                $menabung->saldo = $tabungan->saldo - $jumlah_bersih;
             }
             if($menabung->saldo >=0 ){
                 $menabung->save();
@@ -41,13 +43,14 @@ class TabunganController extends Controller
                 $pesan = 'Transaksi gagal';
             }
         }else{
-            $menabung = Tabungan::make($request->input());
-            $menabung->saldo = $request->jumlah;
+            $menabung = Tabungan::make($request->except('jumlah'));
+            $menabung->jumlah = $jumlah_bersih;
+            $menabung->saldo = $jumlah_bersih;
             $menabung->save();
             $pesan = 'Berhasil melakukan transaksi';
         }
 
-        //tambahkan tabungan ke transaksi
+        //tambahkan tabungan ke keuangan
         $keuangan = Keuangan::orderBy('created_at','desc')->first();
         if($keuangan != null){
             if($menabung->tipe == 'in'){

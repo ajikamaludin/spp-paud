@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group" style="display:none" id="form-jumlah">
                                     <label class="form-label">Jumlah</label>
-                                    <input type="number" name="jumlah" id="jumlah" class="form-control" min='100'>
+                                    <input type="number" name="jumlah" id="jumlah" class="form-control" min='100' required>
                                 </div>
                                 <div class="form-group" style="display:none" id="form-keterangan">
                                     <label class="form-label">Keterangan</label>

@@ -71,6 +71,9 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('keuangan', 'KeuanganController@index')->name('keuangan.index');
     Route::post('keuangan', 'KeuanganController@store')->name('keuangan.store');
     Route::get('export-keuangan', 'KeuanganController@export')->name('keuangan.export');
+
+    //Pembayaran SPP
+    Route::get('transaksi-spp','TransaksiController@index')->name('spp.index');
 });
 
 

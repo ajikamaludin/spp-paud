@@ -58,7 +58,7 @@
                         @foreach ($siswa as $index => $item)
                             <tr>
                                 <td><span class="text-muted">{{ $index+1 }}</span></td>
-                                <td> {{ $item->kelas->nama }} </td>
+                                <td> {{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? "(".$item->kelas->periode->nama.")" : ''}}</td>
                                 <td>
                                     <a href="" class="link-unmuted">
                                         {{ $item->nama }}

@@ -21,16 +21,8 @@
         <div class="col-6 col-sm-3 col-lg-3">
             <div class="card">
                 <div class="card-body p-3 text-center">
-                <div class="h1 m-0">IDR {{ format_idr($total_uang_tabungan) }}</div>
-                <div class="text-muted mb-4">Total Uang Tabungan</div>
-                </div>
-            </div>
-        </div>
-        <div class="col-6 col-sm-3 col-lg-3">
-            <div class="card">
-                <div class="card-body p-3 text-center">
-                <div class="h1 m-0">IDR {{ format_idr($total_uang_spp) }}</div>
-                <div class="text-muted mb-4">Total Uang SPP</div>
+                <div class="h1 m-0">IDR {{ format_idr($total_uang_masuk) }}</div>
+                <div class="text-muted mb-4">Total Uang Masuk</div>
                 </div>
             </div>
         </div>
@@ -45,18 +37,16 @@
         <div class="col-6 col-sm-3 col-lg-3">
             <div class="card">
                 <div class="card-body p-3 text-center">
-                <div class="h1 m-0">IDR {{ format_idr($total_uang_masuk) }}</div>
-                <div class="text-muted mb-4">Total Uang Masuk</div>
+                <div class="h1 m-0">IDR {{ format_idr($total_uang_spp) }}</div>
+                <div class="text-muted mb-4">Total Uang SPP</div>
                 </div>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-6 col-sm-3 col-lg-3">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Dashboard</h3>
-                </div>
-                <div class="card-body">
-                    <h5>Dashboard</h5>
+                <div class="card-body p-3 text-center">
+                <div class="h1 m-0">IDR {{ format_idr($total_uang_tabungan) }}</div>
+                <div class="text-muted mb-4">Total Uang Tabungan</div>
                 </div>
             </div>
         </div>

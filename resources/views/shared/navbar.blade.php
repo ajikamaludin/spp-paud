@@ -9,7 +9,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#!" class="nav-link {{ set_active(['transaksispp.*'], 'active') }}">
+                        <a href="{{ route('spp.index') }}" class="nav-link {{ set_active(['spp.*'], 'active') }}">
                             <i class="fe fe-repeat"></i> Transaksi SPP
                         </a>
                     </li>
