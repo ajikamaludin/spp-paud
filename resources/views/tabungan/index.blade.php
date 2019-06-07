@@ -94,7 +94,7 @@
                             <th>KD</th>
                             <th>Keterangan</th>
                             <th>Jumlah</th>
-                            <th></th> 
+                            {{-- <th></th>  --}}
                         </tr>
                         </thead>
                         <tbody>
@@ -116,14 +116,14 @@
                                 </td>
                                 <td style="max-width:150px;">{{ $item->keperluan }}</td>
                                 <td>IDR. {{ format_idr($item->jumlah) }}</td>
-                                <td class="text-center">
+                                {{-- <td class="text-center"> --}}
                                     {{-- <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}" title="delete item">
                                         <i class="fe fe-trash"></i>
                                     </a> --}}
-                                    <form action="{{ route('tabungan.destroy', $item->id) }}" method="POST" id="form-{{ $item->id }}">
+                                    {{-- <form action="{{ route('tabungan.destroy', $item->id) }}" method="POST" id="form-{{ $item->id }}">
                                         @csrf 
-                                    </form>
-                                </td>
+                                    </form> --}}
+                                {{-- </td> --}}
                             </tr>
                         @endforeach
                         </tbody>

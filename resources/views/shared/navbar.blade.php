@@ -4,8 +4,8 @@
             <div class="col-lg order-lg-first">
                 <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
                     <li class="nav-item">
-                        <a href="{{ route('web.index') }}" class="nav-link {{ set_active(['web.index'], 'active') }}">
-                            <i class="fe fe-home"></i> Home
+                        <a href="{{ route('web.index') }}" class="nav-link {{ set_active(['web.*'], 'active') }}">
+                            <i class="fe fe-home"></i> Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
@@ -19,7 +19,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#!" class="nav-link">
+                        <a href="{{ route('keuangan.index') }}" class="nav-link {{ set_active(['keuangan.*'], 'active') }}">
                             <i class="fe fe-repeat"></i> Keuangan
                         </a>
                     </li>

@@ -77,10 +77,10 @@
                                 </td>
                                 <td class="text-center">
                                     <a class="icon" href="{{ route('siswa.show', $item->id) }}" title="lihat detail">
-                                        <i class="fe fe-eye"></i>
+                                        <i class="fe fe-eye"></i> 
                                     </a>
                                     <a class="icon" href="{{ route('siswa.edit', $item->id) }}" title="edit item">
-                                        <i class="fe fe-edit"></i>
+                                        <i class="fe fe-edit"></i> 
                                     </a>
                                     <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}" title="delete item">
                                         <i class="fe fe-trash"></i>
