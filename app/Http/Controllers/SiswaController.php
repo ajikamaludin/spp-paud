@@ -10,6 +10,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\SiswaExport;
 use App\Imports\SiswaImport;
 use App\Models\Tabungan;
+use App\Models\Transaksi;
+use App\Models\Tagihan;
 
 class SiswaController extends Controller
 {
@@ -91,7 +93,31 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        //TODO: detail siswa with tagihan, lunas, is yatim is free all
+        $input = Tabungan::where('tipe','in')->where('siswa_id',$siswa->id)->sum('jumlah');
+        $output = Tabungan::where('tipe','out')->where('siswa_id',$siswa->id)->sum('jumlah');
+        $tabungan = Tabungan::where('siswa_id', $siswa->id)->orderBy('created_at','desc');
+        
+        if($tabungan->count() != 0){
+            $verify = $tabungan->first()->saldo;
+        }else{
+            $verify = 0;
+        }
+        $tabungan = $tabungan->paginate(10, ['*'], 'tabungan');
+        
+        if(($input - $output) == $verify){
+            $saldo = format_idr($input - $output);
+        }else{
+            $saldo = 'invalid'.format_idr($input - $output);
+        }
+        
+        $tagihan = $this->getTagihan($siswa);
+
+        return view('siswa.show', [
+            'siswa' => $siswa,
+            'saldo' => $saldo,
+            'tabungan' => $tabungan,
+            'tagihan' => $tagihan,
+        ]);
     }
 
     /**
@@ -159,10 +185,22 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-        //TODO: delete them all , 
+        if(($siswa->transaksi->count() == 0) && ($siswa->tabungan->count() == 0)){
+            if($siswa->delete()){
+                return redirect()->route('siswa.index')->with([
+                    'type' => 'success',
+                    'msg' => 'siswa telah dihapus'
+                ]);
+            }
+        }else{
+            return redirect()->route('siswa.index')->with([
+                'type' => 'danger',
+                'msg' => 'tidak dapat menghapus siswa yang masih memiliki transaksi'
+            ]);
+        }
         return redirect()->route('siswa.index')->with([
             'type' => 'danger',
-            'msg' => 'Err.., Belum dibikin cuy , cocokin sama tagihan dll dulu'
+            'msg' => 'Err.., terjadi kesalahan'
         ]);
     }
 
@@ -224,5 +262,53 @@ class SiswaController extends Controller
         }else{
             return response()->json(['saldo' => '0', 'sal' => 'invalid '.format_idr($input - $output)]);
         }
+    }
+
+    protected function getTagihan(Siswa $siswa)
+    {
+        $tagihan = [];
+        $tagihan_ids = [];
+
+        //wajib semua
+        $tagihan_wajib = Tagihan::where('wajib_semua','1')->get()->toArray();
+        //kelas only
+        $tagihan_kelas = Tagihan::where('kelas_id', $siswa->kelas->id)->get()->toArray();
+        //student only
+        $tagihan_siswa = [];
+        $tagihan_rolesiswa = $siswa->role;
+        foreach($tagihan_rolesiswa as $tag_siswa){
+            $tagihan_siswa[] = $tag_siswa->tagihan->toArray();
+        }
+
+        $tagihan_semua = array_merge($tagihan_wajib, $tagihan_kelas, $tagihan_siswa);
+        
+        foreach($tagihan_semua as $tagih){
+            $tagihan_ids[] = $tagih['id'];
+            $payed = Transaksi::where('tagihan_id', $tagih['id'])->where('siswa_id', $siswa->id)->get();
+            if($payed->count() == 0){
+                $tagihan[] = [
+                    'nama' => $tagih['nama'],
+                    'jumlah' => format_idr($tagih['jumlah']),
+                    'diskon'=> '',
+                    'total'=> '',
+                    'is_lunas'=> '0',
+                    'created_at' => '',
+                    'keterangan' => ''
+                ];
+            }else{
+                foreach($payed as $pay){
+                    $tagihan[] = [
+                        'nama' => $tagih['nama'],
+                        'jumlah' => format_idr($tagih['jumlah']),
+                        'diskon'=> format_idr($pay->diskon),
+                        'total'=> format_idr($pay->keuangan->jumlah),
+                        'is_lunas'=> $pay->is_lunas,
+                        'created_at' => $pay->created_at->format('d-m-Y'),
+                        'keterangan' => $pay->keterangan
+                    ];
+                }
+            }
+        }
+        return $tagihan;
     }
 }

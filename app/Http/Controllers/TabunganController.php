@@ -89,4 +89,18 @@ class TabunganController extends Controller
     {
         return Excel::download(new TabunganExport, 'mutasi_tabungan-'.now().'.xlsx');
     }
+
+    public function cetak(Siswa $siswa)
+    {
+        $input = Tabungan::where('tipe','in')->where('siswa_id',$siswa->id)->sum('jumlah');
+        $output = Tabungan::where('tipe','out')->where('siswa_id',$siswa->id)->sum('jumlah');
+
+        $verify = Tabungan::where('siswa_id', $siswa->id)->orderBy('created_at','desc')->first()->saldo;
+        $tabungan = Tabungan::where('siswa_id', $siswa->id)->orderBy('created_at','desc')->get();
+        return view('tabungan.print', [
+            'siswa' => $siswa,
+            'tabungan' => $tabungan,
+            'saldo' => format_idr($input - $output).(($input - $output) == $verify ? '' : ' invalid'),
+        ]);
+    }
 }

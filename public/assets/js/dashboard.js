@@ -21,7 +21,9 @@ paths: {
 'circle-progress': 'assets/js/vendors/circle-progress.min',
 'datepicker': 'assets/js/vendors/datepicker',
 'sweetalert' : 'assets/js/vendors/sweetalert.min',
-'select2' : 'assets/js/vendors/select2.min'
+'select2' : 'assets/js/vendors/select2.min',
+'moment' : 'assets/js/vendors/moment.min',
+'daterangepicker' : 'assets/js/vendors/daterangepicker.min'
 }
 });
 window.tabler = {

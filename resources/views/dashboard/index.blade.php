@@ -50,5 +50,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Laporan Harian : 20-20-2020</h3>
+                </div>
+                <div class="card-body">
+                    report harian
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

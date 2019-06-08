@@ -104,6 +104,34 @@ class TransaksiController extends Controller
     //get list tagihan of siswa
     public function tagihan(Siswa $siswa)
     {
+        $tagihan = $this->getTagihan($siswa);
+        return response()->json($tagihan);
+    }
+
+    public function print(Request $request, Siswa $siswa)
+    {
+        $beweendate = [];
+        $dates = explode('-',$request->dates);
+        
+        foreach($dates as $index => $date){
+            if($index == 0){
+                $date .= ' 00:00:00';
+            }else{
+                $date .= ' 23:59:59';
+            }
+            $beweendate[] = \Carbon\Carbon::create($date)->format('Y-m-d H:i:s');
+        }
+        $transaksi = Transaksi::where('siswa_id', $siswa->id)->whereBetween('created_at', [$beweendate[0], $beweendate[1]])->get();
+
+        return view('transaksi.print',[
+            'siswa' => $siswa,
+            'tanggal' => $request->dates,
+            'transaksi' => $transaksi
+        ]);
+    }
+
+    protected function getTagihan(Siswa $siswa)
+    {
         //wajib semua
         $tagihan_wajib = Tagihan::where('wajib_semua','1')->get()->toArray();
 
@@ -119,6 +147,6 @@ class TransaksiController extends Controller
 
         $tagihan = array_merge($tagihan_wajib, $tagihan_kelas, $tagihan_siswa);
 
-        return response()->json($tagihan);
+        return $tagihan;
     }
 }

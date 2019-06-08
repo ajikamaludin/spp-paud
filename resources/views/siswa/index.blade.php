@@ -60,7 +60,7 @@
                                 <td><span class="text-muted">{{ $index+1 }}</span></td>
                                 <td> {{ $item->kelas->nama }}{{ isset($item->kelas->periode) ? "(".$item->kelas->periode->nama.")" : ''}}</td>
                                 <td>
-                                    <a href="" class="link-unmuted">
+                                    <a href="{{ route('siswa.show', $item->id) }}" class="link-unmuted">
                                         {{ $item->nama }}
                                     </a>
                                 </td>

@@ -36,7 +36,7 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post('tambah-periode', 'PeriodeController@store')->name('periode.store');
     Route::get('periode/{periode}/ubah', 'PeriodeController@edit')->name('periode.edit');
     Route::post('periode/{periode}/ubah','PeriodeController@update')->name('periode.update');
-    Route::post('periode/{periode}/hapus', 'PeriodeController@destroy')->name('periode.destroy');
+    Route::post('periode/{periode}/hapus', 'PeriodeController@destroy')->name('periode.destroy'); 
 
     //Kelas
     Route::get('kelas','KelasController@index')->name('kelas.index');
@@ -66,6 +66,7 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('tabungan', 'TabunganController@index')->name('tabungan.index');
     Route::post('menabung', 'TabunganController@menabung')->name('tabungan.store');
     Route::get('export-mutasi', 'TabunganController@export')->name('tabungan.export');
+    Route::get('cetak-tabungan/{siswa}', 'TabunganController@cetak')->name('tabungan.cetak');
 
     //Keuangan 
     Route::get('keuangan', 'KeuanganController@index')->name('keuangan.index');
@@ -74,6 +75,7 @@ Route::middleware(['auth:web'])->group(function(){
 
     //Pembayaran SPP
     Route::get('transaksi-spp','TransaksiController@index')->name('spp.index');
+    Route::post('print-spp/{siswa?}','TransaksiController@print')->name('spp.print');
 });
 
 
