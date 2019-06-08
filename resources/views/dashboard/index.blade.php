@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
-@section('site-name','Sistem Informasi SPP')
-@section('page-name','PAUD')
+@section('page-name','Dashboard')
 
 @section('content')
     <div class="page-header">
@@ -53,7 +52,12 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Laporan Harian : 20-20-2020</h3>
+                    <h3 class="card-title">Laporan Harian : {{ now()->format('d-m-Y') }}</h3>
+                    <div class="card-options">
+                        <input class="form-control mr-2" type="text" name="dates" style="max-width: 200px" data-toggle="datepicker" autocomplete="off" value="{{ now()->format('d-m-Y') }}">
+                        <button id="btn-cetak-spp" class="btn btn-primary mr-1" value="#">Cetak</button>
+                        <a href="#!" target="_blank" class="btn btn-primary">Export</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     report harian
@@ -61,4 +65,15 @@
             </div>
         </div>
     </div>
+@endsection
+@section('js')
+    <script>
+        require(['jquery', 'selectize','datepicker'], function ($, selectize) {
+        $(document).ready(function () {
+                $('[data-toggle="datepicker"]').datepicker({
+                    format: 'dd-MM-yyyy'
+                });
+            });
+        });
+    </script>
 @endsection

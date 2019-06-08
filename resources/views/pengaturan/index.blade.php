@@ -31,6 +31,10 @@
                     <p>Nama Aplikasi : <b>{{ $pengaturan->nama }}</b></p>
                     <p>Logo : </p>
                         <img src="{{ asset("img/logo.jpg") }}" alt="Logo Sistem" height="250px">
+                    <div class="mt-8">
+                        <button class="btn btn-primary btn-sm">Backup Data</button>
+                        <button class="btn btn-danger btn-sm">Reset Data</button>
+                    </div>
                 </div>
             </div>
         </div>

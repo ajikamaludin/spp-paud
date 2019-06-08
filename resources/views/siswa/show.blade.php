@@ -30,7 +30,8 @@
                 <div class="card-header">
                     <h3 class="card-title">Tabungan</h3>
                     <div class="card-options"> 
-                        <a href="{{ route('tabungan.cetak', $siswa->id) }}" target="_blank" class="btn btn-primary">Cetak</a>
+                        <a href="{{ route('tabungan.cetak', $siswa->id) }}" target="_blank" class="btn btn-primary mr-1">Cetak</a>
+                        <a href="#!" target="_blank" class="btn btn-primary">Export</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -73,8 +74,9 @@
                     <h3 class="card-title">Tagihan SPP</h3>
                     @if(!$siswa->is_yatim)
                     <div class="card-options">
-                        <input class="form-control mr-4" type="text" name="dates" style="max-width: 200px" id="daterange" value="{{ now()->subDay(7)->format('m-d-Y')." - ".now()->format('m-d-Y') }}">
-                        <button id="btn-cetak-spp" class="btn btn-primary" value="{{ $siswa->id }}">Cetak</button>
+                        <input class="form-control mr-2" type="text" name="dates" style="max-width: 200px" id="daterange" value="{{ now()->subDay(7)->format('m-d-Y')." - ".now()->format('m-d-Y') }}">
+                        <button id="btn-cetak-spp" class="btn btn-primary mr-1" value="{{ $siswa->id }}">Cetak</button>
+                        <a href="#!" target="_blank" class="btn btn-primary">Export</a>
                     </div>
                     @endif
                 </div>

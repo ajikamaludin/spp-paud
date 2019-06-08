@@ -67,6 +67,7 @@ Route::middleware(['auth:web'])->group(function(){
     Route::post('menabung', 'TabunganController@menabung')->name('tabungan.store');
     Route::get('export-mutasi', 'TabunganController@export')->name('tabungan.export');
     Route::get('cetak-tabungan/{siswa}', 'TabunganController@cetak')->name('tabungan.cetak');
+    Route::get('export-tabungan/{siswa}', 'TabunganController@cetak')->name('tabungan.siswa.export'); //TODO: export tabungan siswa
 
     //Keuangan 
     Route::get('keuangan', 'KeuanganController@index')->name('keuangan.index');
@@ -76,6 +77,7 @@ Route::middleware(['auth:web'])->group(function(){
     //Pembayaran SPP
     Route::get('transaksi-spp','TransaksiController@index')->name('spp.index');
     Route::post('print-spp/{siswa?}','TransaksiController@print')->name('spp.print');
+    Route::post('export-spp/{siswa?}','TransaksiController@print')->name('spp.export');// TODO: export spp 
 });
 
 

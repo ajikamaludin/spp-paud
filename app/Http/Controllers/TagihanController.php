@@ -157,8 +157,20 @@ class TagihanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tagihan $tagihan)
     {
-        //TODO: work on this if transaksi and keuangan done
+        if($tagihan->transaksi->count() != 0){
+            return redirect()->route('tagihan.index')->with([
+                'type' => 'danger',
+                'msg' => 'tidak dapat menghapus tagihan yang masih memiliki transaksi'
+            ]);
+        }
+        $tagihan->siswa()->detach();
+        if($tagihan->delete()){
+            return redirect()->route('tagihan.index')->with([
+                'type' => 'success',
+                'msg' => 'tagihan telah dihapus'
+            ]);
+        }
     }
 }

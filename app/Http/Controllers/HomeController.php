@@ -57,4 +57,7 @@ class HomeController extends Controller
             'msg' => 'Pengaturan diubah'
         ]);
     }
+
+    //TODO: dump sql all data
+    //TODO: reset all data
 }
