@@ -54,13 +54,42 @@
                 <div class="card-header">
                     <h3 class="card-title">Laporan Harian : {{ now()->format('d-m-Y') }}</h3>
                     <div class="card-options">
-                        <input class="form-control mr-2" type="text" name="dates" style="max-width: 200px" data-toggle="datepicker" autocomplete="off" value="{{ now()->format('d-m-Y') }}">
+                        <input class="form-control mr-2" type="text" name="dates" style="max-width: 200px" data-toggle="datepicker" autocomplete="off" value="{{ now()->format('d-m-Y') }}" id="date">
                         <button id="btn-cetak-spp" class="btn btn-primary mr-1" value="#">Cetak</button>
-                        <a href="#!" target="_blank" class="btn btn-primary">Export</a>
+                        <button id="btn-export-spp" class="btn btn-primary">Export</button>
                     </div>
                 </div>
                 <div class="card-body">
-                    report harian
+                    <table class="table card-table table-hover table-vcenter text-nowrap title" id="print">
+                        <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Nama</th>
+                            <th>Pembayaran</th>
+                            <th>Total</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($transaksi as $item)
+                            <tr>
+                                <td>{{ $item->created_at->format('d-m-Y') }}</td>
+                                <td>{{ $item->siswa->nama }}</td>
+                                <td>{{ $item->tagihan->nama }}</td>
+                                <td>IDR. {{ format_idr($item->keuangan->jumlah) }}</td>
+                                @php
+                                    $jumlah += $item->keuangan->jumlah
+                                @endphp
+                            </tr>
+                        @endforeach
+                            <tr>
+                                <td><b>Total</b></td>
+                                <td></td>
+                                <td></td>
+                                <td>IDR. {{ format_idr($jumlah) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,6 +102,46 @@
                 $('[data-toggle="datepicker"]').datepicker({
                     format: 'dd-MM-yyyy'
                 });
+                $('#btn-cetak-spp').on('click', function(){
+                    var form = document.createElement("form");
+                    form.setAttribute("style", "display: none");
+                    form.setAttribute("method", "post");
+                    form.setAttribute("action", "{{route('laporan-harian.cetak')}}");
+                    form.setAttribute("target", "_blank");
+                    
+                    var token = document.createElement("input");
+                    token.setAttribute("name", "_token");
+                    token.setAttribute("value", "{{csrf_token()}}");
+                    
+                    var dateForm = document.createElement("input");
+                    dateForm.setAttribute("name", "date");
+                    dateForm.setAttribute("value", $('#date').val());
+
+                    form.appendChild(token);
+                    form.appendChild(dateForm);
+                    document.body.appendChild(form);
+                    form.submit();
+                })
+                $('#btn-export-spp').on('click', function(){
+                    var form = document.createElement("form");
+                    form.setAttribute("style", "display: none");
+                    form.setAttribute("method", "post");
+                    form.setAttribute("action", "{{route('laporan-harian.export')}}");
+                    form.setAttribute("target", "_blank");
+                    
+                    var token = document.createElement("input");
+                    token.setAttribute("name", "_token");
+                    token.setAttribute("value", "{{csrf_token()}}");
+                    
+                    var dateForm = document.createElement("input");
+                    dateForm.setAttribute("name", "date");
+                    dateForm.setAttribute("value", $('#date').val());
+
+                    form.appendChild(token);
+                    form.appendChild(dateForm);
+                    document.body.appendChild(form);
+                    form.submit();
+                })
             });
         });
     </script>

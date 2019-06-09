@@ -17,6 +17,8 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('pengaturan','HomeController@pengaturan')->name('pengaturan.index');
     Route::get('ubah-pengaturan','HomeController@editPengaturan')->name('pengaturan.edit');
     Route::post('ubah-pengaturan','HomeController@storePengaturan')->name('pengaturan.store');
+    Route::Post('cetak-laporan-harian','HomeController@cetak')->name('laporan-harian.cetak');
+    Route::post('export-laporan-harian','HomeController@export')->name('laporan-harian.export');
 
     //Siswa
     Route::get('siswa','SiswaController@index')->name('siswa.index');

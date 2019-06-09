@@ -22,6 +22,10 @@ class Tagihan extends Model
         return $this->hasMany('App\Models\Transaksi','tagihan_id','id');
     }
 
+    public function transaksiToday(){
+        return $this->transaksi()->whereDate('created_at', now()->today());
+    }
+
     public function role(){
         return $this->hasMany('App\Models\Role','tagihan_id','id');
     }

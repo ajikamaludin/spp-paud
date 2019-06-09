@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Keuangan;
+use App\Models\Tagihan;
+use App\Models\Transaksi;
+use App\Exports\LaporanHarianExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
@@ -14,12 +18,17 @@ class HomeController extends Controller
         $total_uang_spp = Keuangan::where('tipe','in')->where('transaksi_id','!=','null')->sum('jumlah') - Keuangan::where('tipe','out')->where('transaksi_id','!=','null')->sum('jumlah');;
         $total_uang_masuk = Keuangan::where('tipe','in')->sum('jumlah');
         $total_uang_keluar = Keuangan::where('tipe','out')->sum('jumlah');
+
+        $transaksi = Transaksi::orderBy('siswa_id','desc')->whereDate('created_at', now()->today())->get();
+
         return view('dashboard.index',[
             'total_uang' => $total_uang,
             'total_uang_tabungan' => $total_uang_tabungan,
             'total_uang_spp' => $total_uang_spp,
             'total_uang_masuk' => $total_uang_masuk,
             'total_uang_keluar' => $total_uang_keluar,
+            'transaksi' => $transaksi,
+            'jumlah' => '0'
         ]);
     }
 
@@ -58,6 +67,15 @@ class HomeController extends Controller
         ]);
     }
 
-    //TODO: dump sql all data
-    //TODO: reset all data
+    public function cetak(Request $request){
+        $date = \Carbon\Carbon::create($request->date)->format('Y-m-d');
+        $transaksi = Transaksi::orderBy('siswa_id','desc')->whereDate('created_at', $date)->get();
+
+        return view('dashboard.export', ['transaksi' => $transaksi, 'date' => $request->date, 'jumlah' => 0, 'print' => true]);
+    }
+
+    public function export(Request $request){
+        $date = \Carbon\Carbon::create($request->date)->format('Y-m-d');
+        return Excel::download(new LaporanHarianExport($date, $request->date), 'laporan-harian-'.now().'.xlsx');
+    }
 }
