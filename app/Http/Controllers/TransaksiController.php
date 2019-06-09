@@ -9,6 +9,7 @@ use App\Models\Tagihan;
 use Illuminate\Support\Facades\DB;
 use App\Models\Keuangan;
 use App\Models\Tabungan;
+use App\Exports\SppSiswaExport;
 
 class TransaksiController extends Controller
 {
@@ -148,5 +149,24 @@ class TransaksiController extends Controller
         $tagihan = array_merge($tagihan_wajib, $tagihan_kelas, $tagihan_siswa);
 
         return $tagihan;
+    }
+
+    public function export(Request $request, Siswa $siswa)
+    {
+        $beweendate = [];
+        $dates = explode('-',$request->dates);
+        
+        foreach($dates as $index => $date){
+            if($index == 0){
+                $date .= ' 00:00:00';
+            }else{
+                $date .= ' 23:59:59';
+            }
+            $beweendate[] = \Carbon\Carbon::create($date)->format('Y-m-d H:i:s');
+        }
+
+        $transaksi = Transaksi::where('siswa_id', $siswa->id)->whereBetween('created_at', [$beweendate[0], $beweendate[1]])->get();
+
+        return \Excel::download(new SppSiswaExport($siswa, $transaksi, $request->dates), 'spp_siswa-'.now().'.xlsx');
     }
 }

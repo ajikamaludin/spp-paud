@@ -79,7 +79,7 @@ Route::middleware(['auth:web'])->group(function(){
     //Pembayaran SPP
     Route::get('transaksi-spp','TransaksiController@index')->name('spp.index');
     Route::post('print-spp/{siswa?}','TransaksiController@print')->name('spp.print');
-    Route::post('export-spp/{siswa?}','TransaksiController@export')->name('spp.export');// TODO: export spp 
+    Route::post('export-spp/{siswa?}','TransaksiController@export')->name('spp.export');
 });
 
 

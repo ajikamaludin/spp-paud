@@ -76,7 +76,7 @@
                     <div class="card-options">
                         <input class="form-control mr-2" type="text" name="dates" style="max-width: 200px" id="daterange" value="{{ now()->subDay(7)->format('m-d-Y')." - ".now()->format('m-d-Y') }}">
                         <button id="btn-cetak-spp" class="btn btn-primary mr-1" value="{{ $siswa->id }}">Cetak</button>
-                        <a href="#!" target="_blank" class="btn btn-primary">Export</a>
+                        <button id="btn-export-spp" class="btn btn-primary" value="{{ $siswa->id }}">Export</button>
                     </div>
                     @endif
                 </div>
@@ -129,6 +129,30 @@
             form.setAttribute("style", "display: none");
             form.setAttribute("method", "post");
             form.setAttribute("action", "{{ route('spp.print') }}/" + this.value);
+            form.setAttribute("target", "_blank");
+            
+            var token = document.createElement("input");
+            token.setAttribute("name", "_token");
+            token.setAttribute("value", "{{csrf_token()}}");
+            
+            var dateForm = document.createElement("input");
+            dateForm.setAttribute("name", "dates");
+            dateForm.setAttribute("value", $('#daterange').val());
+
+            form.appendChild(token);
+            form.appendChild(dateForm);
+            document.body.appendChild(form);
+            form.submit();
+
+            console.log($('#daterange').val())
+        })
+
+        $('#btn-export-spp').on('click', function(){
+            //form print
+            var form = document.createElement("form");
+            form.setAttribute("style", "display: none");
+            form.setAttribute("method", "post");
+            form.setAttribute("action", "{{ route('spp.export') }}/" + this.value);
             form.setAttribute("target", "_blank");
             
             var token = document.createElement("input");

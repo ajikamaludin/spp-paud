@@ -2,15 +2,24 @@
 
 namespace App\Exports;
 
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\FromView;
 
-class SppSiswaExport implements FromCollection
+class SppSiswaExport implements FromView
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    public function __construct($siswa, $transaksi, $tanggal)
     {
-        //
+        $this->siswa = $siswa;
+        $this->transaksi = $transaksi;
+        $this->tanggal = $tanggal;
+    }
+    
+    public function view(): View
+    {
+        return view('transaksi.export', [
+            'siswa' => $this->siswa,
+            'transaksi' => $this->transaksi,
+            'tanggal' => $this->tanggal
+        ]);
     }
 }
