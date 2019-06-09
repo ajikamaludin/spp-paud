@@ -9,6 +9,7 @@ use App\Models\Keuangan;
 use Illuminate\Support\Facades\DB;
 use App\Exports\TabunganExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TabunganSiswaExport;
 
 class TabunganController extends Controller
 {
@@ -102,5 +103,10 @@ class TabunganController extends Controller
             'tabungan' => $tabungan,
             'saldo' => format_idr($input - $output).(($input - $output) == $verify ? '' : ' invalid'),
         ]);
+    }
+
+    public function siswaexport(Siswa $siswa)
+    {
+        return Excel::download(new TabunganSiswaExport($siswa), 'tabungan_siswa-'.now().'.xlsx');
     }
 }

@@ -31,7 +31,7 @@
                     <h3 class="card-title">Tabungan</h3>
                     <div class="card-options"> 
                         <a href="{{ route('tabungan.cetak', $siswa->id) }}" target="_blank" class="btn btn-primary mr-1">Cetak</a>
-                        <a href="#!" target="_blank" class="btn btn-primary">Export</a>
+                        <a href="{{ route('tabungan.siswa.export', $siswa->id) }}" target="_blank" class="btn btn-primary">Export</a>
                     </div>
                 </div>
                 <div class="card-body">
