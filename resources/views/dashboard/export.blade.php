@@ -4,10 +4,10 @@
 <table style="border: 1px solid black; width: 100%">
     <thead style="border: 1px solid black;">
     <tr>
-        <th>Tanggal</th>
-        <th>Nama</th>
-        <th>Pembayaran</th>
-        <th>Total</th>
+        <th><b>Tanggal</b></th>
+        <th><b>Nama</b></th>
+        <th><b>Pembayaran</b></th>
+        <th><b>Total</b></th>
     </tr>
     </thead>
     <tbody>

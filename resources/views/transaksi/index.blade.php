@@ -100,7 +100,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Histori Transaksi</h3>
                     <div class="card-options">
-                        <a href="{{ route('keuangan.export') }}" class="btn btn-primary btn-sm ml-2" download="true">Export</a>
+                        <a href="{{ route('transaksi.export') }}" class="btn btn-primary btn-sm ml-2" download="true">Export</a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -110,9 +110,9 @@
                             <th class="w-1">No.</th>
                             <th>Tanggal</th>
                             <th>Siswa</th>
-                            <th>Jumlah</th>
+                            <th>Tagihan</th>
                             <th>Diskon</th>
-                            <th>Total</th>
+                            <th>Dibayarkan</th>
                             <th>Keterangan</th>
                         </tr>
                         </thead>
@@ -122,9 +122,9 @@
                                 <td><span class="text-muted">{{ $index+1 }}</span></td>
                                 <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                 <td>{{ $item->siswa->nama.'('.$item->siswa->kelas->nama.')' }}</td>
-                                <td>IDR. {{ format_idr($item->tagihan->jumlah) }}</td>
+                                <td>{{ $item->tagihan->nama }}</td>
                                 <td>IDR. {{ format_idr($item->diskon) }}</td>
-                                <td>IDR. {{ format_idr($item->tagihan->jumlah - $item->diskon) }}</td>
+                                <td>IDR. {{ format_idr($item->keuangan->jumlah) }}</td>
                                 <td style="max-width:150px;">{{ $item->keterangan }}</td>
                             </tr>
                         @endforeach

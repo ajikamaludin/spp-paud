@@ -81,6 +81,7 @@
                 <div class="card-footer">
                     <div class="d-flex">
                         <button type="submit" class="btn btn-primary ml-auto" id="cetak">Cetak</button>
+                        <button type="submit" class="btn btn-secondary ml-2" id="baru">Baru</button>
                     </div>
                 </div>
             </div>
@@ -122,6 +123,7 @@
                     $('#tambah').hide()
                     $('.hapus').hide()
                     $('#histori').toggle()
+                    $('#baru').toggle()
                     
                     window.print()
 
@@ -159,6 +161,7 @@
                     $('.page-title').show()
                     $('#tambah').show()
                     $('.hapus').show()
+                    $('#baru').toggle()
             }
             var index = 0
             $('#tambah').on('click', function(){
@@ -196,7 +199,9 @@
                 });
                 $('#total').text(seluruh);
             })
-
+            $('#baru').on('click', function(){
+                window.location.reload()
+            })
             $(document).on('click','.hapus', function(){
                 id = this.value
                 console.log(id)

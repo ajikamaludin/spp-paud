@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Keuangan;
 use App\Models\Tabungan;
 use App\Exports\SppSiswaExport;
+use App\Exports\SppExport;
 
 class TransaksiController extends Controller
 {
@@ -100,6 +101,11 @@ class TransaksiController extends Controller
             ]);
         }
         
+    }
+
+    public function transaksiExport()
+    {
+        return \Excel::download(new SppExport, 'histori_spp-'.now().'.xlsx');
     }
 
     //get list tagihan of siswa
