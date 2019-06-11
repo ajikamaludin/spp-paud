@@ -16,7 +16,7 @@ class CreateKuitansi extends Migration
         Schema::create('kuitansi', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('invoice');
-            $table->string('items');
+            $table->text('items');
             $table->double('total');
             $table->timestamps();
             $table->softDeletes();

@@ -45,5 +45,8 @@
 </style>
 <script>
     window.print()
+    window.onafterprint = function(){
+        window.close()
+    }
 </script>
 @endif

@@ -80,6 +80,11 @@ Route::middleware(['auth:web'])->group(function(){
     Route::get('transaksi-spp','TransaksiController@index')->name('spp.index');
     Route::post('print-spp/{siswa?}','TransaksiController@print')->name('spp.print');
     Route::post('export-spp/{siswa?}','TransaksiController@export')->name('spp.export');
+
+    //Kuitansi 
+    Route::get('kuitansi', 'KuitansiController@index')->name('kuitansi.index');
+    Route::post('kuitansi', 'KuitansiController@store')->name('kuitansi.store');
+    Route::get('kuitansi/{kuitansi}', 'KuitansiController@print')->name('kuitansi.print');
 });
 
 

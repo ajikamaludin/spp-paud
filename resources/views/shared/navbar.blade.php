@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#!" class="nav-link">
+                            <a href="{{ route('kuitansi.index') }}" class="nav-link {{ set_active(['kuitansi.*'], 'active') }}">
                             <i class="fe fe-folder"></i> Kuitansi
                         </a>
                     </li>
