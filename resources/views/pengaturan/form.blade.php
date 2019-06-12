@@ -25,13 +25,13 @@
                                 <label class="form-label">Nama</label>
                                 <input type="text" class="form-control" name="nama" placeholder="Nama" value="{{ $pengaturan->nama }}" required>
                             </div>
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <div class="form-label">Logo</div>
                                 <div class="custom-file">
                                     <input type="file" class="custom-file-input" name="logo" accept="*.jpeg, *.jpg, *.png">
                                     <label class="custom-file-label">Choose file</label>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

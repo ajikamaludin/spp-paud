@@ -45,8 +45,9 @@
 			<div class="header py-4">
 				<div class="container">
 					<div class="d-flex">
-						<a class="header-brand" href="#!">
-							<img src="{{ asset('img/logo.jpg')}}" class="header-brand-img" alt="tabler logo">
+						<a class="header-brand" href="{{ route('web.index') }}">
+							<h3 class="mt-2" style="margin-bottom: 10px !important">{{ $sitename }}</h3>
+							{{-- <img src="{{ asset('img/logo.jpg')}}" class="header-brand-img" alt="tabler logo"> --}}
 						</a>
 						<div class="d-flex order-lg-2 ml-auto">
 							<div class="dropdown">

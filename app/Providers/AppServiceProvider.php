@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         $pengaturan = DB::table('pengaturan')->first();
         if($pengaturan == null){
-            $nama = 'Sistem Informasi';
+            $nama = 'PAUD TERPADU MUSTIKA ILMU';
         }else{
             $nama = $pengaturan->nama;
         }

@@ -53,7 +53,7 @@
             <div class="card">
                 <div class="card-body p-3 text-center">
                 <div class="h1 m-0">{{ $siswa }}</div>
-                <div class="text-muted mb-4">Siswa/Siswi</div>
+                <div class="text-muted mb-4">Siswa</div>
                 </div>
             </div>
         </div>
