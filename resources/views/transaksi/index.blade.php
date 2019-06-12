@@ -101,6 +101,7 @@
                     <h3 class="card-title">Histori Transaksi</h3>
                     <div class="card-options">
                         <a href="{{ route('transaksi.export') }}" class="btn btn-primary btn-sm ml-2" download="true">Export</a>
+                        <a href="#!cetak" class="btn btn-outline-primary btn-sm ml-2" id="mass-cetak">Cetak</a>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -114,6 +115,7 @@
                             <th>Diskon</th>
                             <th>Dibayarkan</th>
                             <th>Keterangan</th>
+                            <th>Cetak</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -121,11 +123,21 @@
                             <tr>
                                 <td><span class="text-muted">{{ $index+1 }}</span></td>
                                 <td>{{ $item->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $item->siswa->nama.'('.$item->siswa->kelas->nama.')' }}</td>
+                                <td>
+                                    <a href="{{ route('siswa.show', $item->siswa->id) }}" target="_blank">
+                                        {{ $item->siswa->nama.'('.$item->siswa->kelas->nama.')' }}
+                                    </a>
+                                </td>
                                 <td>{{ $item->tagihan->nama }}</td>
                                 <td>IDR. {{ format_idr($item->diskon) }}</td>
                                 <td>IDR. {{ format_idr($item->keuangan->jumlah) }}</td>
                                 <td style="max-width:150px;">{{ $item->keterangan }}</td>
+                                <td>
+                                    <label class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input tandai" name="example-checkbox2" value="{{ $item->id }}">
+                                        <span class="custom-control-label">Tandai</span> 
+                                    </label>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -315,6 +327,34 @@
                 
             })
 
+            $('#mass-cetak').on('click', function(){
+                var ids = []
+                $('.tandai').each(function(){
+                    if(this.checked){
+                        ids.push(this.value)
+                    }
+                })
+
+                var form = document.createElement("form");
+                form.setAttribute("style", "display: none");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "{{ route('transaksi.print') }}");
+                form.setAttribute("target", "_blank");
+                
+                var token = document.createElement("input");
+                token.setAttribute("name", "_token");
+                token.setAttribute("value", "{{csrf_token()}}");
+                
+                var idsForm = document.createElement("input");
+                idsForm.setAttribute("name", "ids");
+                idsForm.setAttribute("value", ids);
+
+                form.appendChild(token);
+                form.appendChild(idsForm);
+                document.body.appendChild(form);
+                form.submit();
+
+            })
         });
     });
 </script>

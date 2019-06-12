@@ -108,6 +108,21 @@ class TransaksiController extends Controller
         return \Excel::download(new SppExport, 'histori_spp-'.now().'.xlsx');
     }
 
+    public function transaksiPrint(Request $request)
+    {
+        $ids = explode(',',$request->ids);
+        $total = 0;
+        $transaksi = Transaksi::whereIn('id', $ids)->get();
+        foreach($transaksi as $trans){
+            $total += $trans->keuangan->jumlah;
+        }
+
+        return view('transaksi.transaksiprint',[
+            'items' => $transaksi,
+            'total' => $total,
+        ]);
+    }
+
     //get list tagihan of siswa
     public function tagihan(Siswa $siswa)
     {

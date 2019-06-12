@@ -94,7 +94,7 @@
                             <th>KD</th>
                             <th>Keterangan</th>
                             <th>Jumlah</th>
-                            {{-- <th></th>  --}}
+                            <th>Cetak</th> 
                         </tr>
                         </thead>
                         <tbody>
@@ -103,9 +103,11 @@
                                 <td><span class="text-muted">{{ $index+1 }}</span></td>
                                 <td>{{ $item->created_at->format('d-m-Y') }}</td>
                                 <td>
-                                    {{ $item->siswa->nama }} -
-                                    {{ $item->siswa->kelas->nama }} -
-                                    {{ isset($item->siswa->kelas->periode) ? $item->siswa->kelas->periode->nama : '' }}
+                                    <a href="{{ route('siswa.show', $item->siswa->id) }}" target="_blank">
+                                        {{ $item->siswa->nama }} -
+                                        {{ $item->siswa->kelas->nama }} -
+                                        {{ isset($item->siswa->kelas->periode) ? $item->siswa->kelas->periode->nama : '' }}
+                                    </a>
                                 </td>
                                 <td>
                                     @if($item->tipe == 'in')
@@ -116,14 +118,11 @@
                                 </td>
                                 <td style="max-width:150px;">{{ $item->keperluan }}</td>
                                 <td>IDR. {{ format_idr($item->jumlah) }}</td>
-                                {{-- <td class="text-center"> --}}
-                                    {{-- <a class="icon btn-delete" href="#!" data-id="{{ $item->id }}" title="delete item">
-                                        <i class="fe fe-trash"></i>
-                                    </a> --}}
-                                    {{-- <form action="{{ route('tabungan.destroy', $item->id) }}" method="POST" id="form-{{ $item->id }}">
-                                        @csrf 
-                                    </form> --}}
-                                {{-- </td> --}}
+                                <td> 
+                                    <a class="btn btn-outline-primary btn-sm" target="_blank" href="{{ route('tabungan.transaksicetak', $item->id)}}">
+                                        Cetak
+                                    </a> 
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

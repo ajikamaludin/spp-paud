@@ -49,6 +49,30 @@
                 </div>
             </div>
         </div>
+        <div class="col-6 col-sm-3 col-lg-3">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                <div class="h1 m-0">{{ $siswa }}</div>
+                <div class="text-muted mb-4">Siswa/Siswi</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-3">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                <div class="h1 m-0">{{ $kelas }}</div>
+                <div class="text-muted mb-4">Kelas</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-sm-3 col-lg-3">
+            <div class="card">
+                <div class="card-body p-3 text-center">
+                <div class="h1 m-0">{{ $item }}</div>
+                <div class="text-muted mb-4">Item Tagihan</div>
+                </div>
+            </div>
+        </div>
         <div class="col-12">
             <div class="card">
                 <div class="card-header">

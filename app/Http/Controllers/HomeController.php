@@ -9,6 +9,8 @@ use App\Models\Tagihan;
 use App\Models\Transaksi;
 use App\Exports\LaporanHarianExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Siswa;
+use App\Models\Kelas;
 
 class HomeController extends Controller
 {
@@ -21,6 +23,10 @@ class HomeController extends Controller
 
         $transaksi = Transaksi::orderBy('siswa_id','desc')->whereDate('created_at', now()->today())->get();
 
+        $siswa = Siswa::count();
+        $item = Tagihan::count();
+        $kelas = Kelas::count();
+
         return view('dashboard.index',[
             'total_uang' => $total_uang,
             'total_uang_tabungan' => $total_uang_tabungan,
@@ -28,7 +34,10 @@ class HomeController extends Controller
             'total_uang_masuk' => $total_uang_masuk,
             'total_uang_keluar' => $total_uang_keluar,
             'transaksi' => $transaksi,
-            'jumlah' => '0'
+            'jumlah' => '0',
+            'siswa' => $siswa,
+            'item' => $item,
+            'kelas' => $kelas,
         ]);
     }
 

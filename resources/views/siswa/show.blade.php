@@ -29,10 +29,12 @@
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Tabungan</h3>
+                    @if($saldo != '0')
                     <div class="card-options"> 
                         <a href="{{ route('tabungan.cetak', $siswa->id) }}" target="_blank" class="btn btn-primary mr-1">Cetak</a>
                         <a href="{{ route('tabungan.siswa.export', $siswa->id) }}" target="_blank" class="btn btn-primary">Export</a>
                     </div>
+                    @endif
                 </div>
                 <div class="card-body">
                     <p><b>Saldo : </b>IDR. {{$saldo}}</p>

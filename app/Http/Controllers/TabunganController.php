@@ -23,6 +23,21 @@ class TabunganController extends Controller
         ]);
     }
 
+    public function transaksiCetak($id)
+    {
+        $tabungan = Tabungan::find($id);
+        $siswa = $tabungan->siswa;
+        $input = Tabungan::where('tipe','in')->where('siswa_id',$siswa->id)->sum('jumlah');
+        $output = Tabungan::where('tipe','out')->where('siswa_id',$siswa->id)->sum('jumlah');
+
+        $verify = Tabungan::where('siswa_id', $siswa->id)->orderBy('created_at','desc')->first()->saldo;
+        return view('tabungan.tabunganprint', [
+            'siswa' => $siswa,
+            'tabungan' => $tabungan,
+            'saldo' => format_idr($input - $output).(($input - $output) == $verify ? '' : ' invalid'),
+        ]);
+    }
+
     //api manabung
     public function menabung(Request $request, Siswa $siswa)
     {
