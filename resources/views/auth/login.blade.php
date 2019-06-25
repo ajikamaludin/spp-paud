@@ -47,7 +47,7 @@
                 <div class="row">
                     <div class="col col-login mx-auto">
                         <div class="text-center mb-6">
-                            <img src="{{ asset('img/logo.jpg')}}" class="h-6" alt="">
+                            {{-- <img src="{{ asset('img/logo.jpg')}}" class="h-6" alt=""> --}}
                         </div>
                         <form class="card" action="{{ route('login') }}" method="post">
                             @csrf

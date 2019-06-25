@@ -55,6 +55,11 @@
                         </a>
                     </li>
                     @endif
+                    <li class="nav-item">
+                        <a href="{{ route('buku.panduan') }}" class="nav-link {{ set_active(['buku.*'], 'active') }}">
+                        <i class="fe fe-book"></i> Buku Panduan
+                    </a>
+                </li>
                 </ul>
             </div>
         </div>

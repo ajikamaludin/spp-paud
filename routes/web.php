@@ -16,6 +16,10 @@
 
     Route::middleware(['auth:web'])->group(function(){
         Route::get('/', 'HomeController@index')->name('web.index');
+        Route::get('buku-panduan', function(){
+            return view('panduan.buku');
+        })->name('buku.panduan');
+
         Route::get('pengaturan','HomeController@pengaturan')->name('pengaturan.index');
         Route::get('ubah-pengaturan','HomeController@editPengaturan')->name('pengaturan.edit');
         Route::post('ubah-pengaturan','HomeController@storePengaturan')->name('pengaturan.store');
