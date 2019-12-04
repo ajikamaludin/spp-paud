@@ -27,6 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        View::share('sitename', 'SPP PAUD SD | Sample App Laravel');
+        View::share('sitename', 'SPP PAUD | Sample App Laravel');
     }
 }
