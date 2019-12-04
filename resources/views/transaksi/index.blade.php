@@ -319,8 +319,10 @@
                             }, 2000)
                         },
                         error: function(data){
-                            console.log('Error......')
-                            console.log(data)
+                            swal({title: "Terjadi kesalahan pada transaksi, Transaksi dibatalkan"})
+                            setTimeout(function(){
+                                window.location.reload()
+                            }, 2000)
                         }
                     });
                 }
