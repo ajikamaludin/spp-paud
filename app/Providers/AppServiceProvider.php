@@ -27,12 +27,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Schema::defaultStringLength(191);
-        $pengaturan = DB::table('pengaturan')->first();
-        if($pengaturan == null){
-            $nama = 'PAUD TERPADU MUSTIKA ILMU';
-        }else{
-            $nama = $pengaturan->nama;
-        }
-        View::share('sitename', $nama);
+        View::share('sitename', 'SPP PAUD SD | Sample App Laravel');
     }
 }
