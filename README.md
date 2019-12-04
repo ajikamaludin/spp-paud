@@ -8,11 +8,11 @@ Please check the official laravel installation guide for server requirements bef
 
 Clone the repository
 
-    git clone [remote]
+    git clone https://github.com/ajikamaludin/spp-paud.git
 
 Switch to the repo folder
 
-    cd [remote-name]
+    cd spp-paud
 
 Install all the dependencies using composer
 
