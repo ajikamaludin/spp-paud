@@ -61,3 +61,7 @@ Password :
 
     password
 
+# Author
+
+[Aji Kamaludin](https://github.com/ajikamaludin)
+[Arif Setyo Nugroho](https://github.com/arifsetyo21)
