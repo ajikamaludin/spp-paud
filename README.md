@@ -56,7 +56,7 @@ You can now access the server at http://localhost:8000
 ----------
 # Default SuperUser
 
-Default Email : 
+Default Email : (demo link)[http://app01.ajikamaludin.id]
 
     admin@example.com 
 
