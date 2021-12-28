@@ -2,6 +2,8 @@
 
 ![preview dashboard](https://raw.githubusercontent.com/ajikamaludin/spp-paud/master/public/preview.png)
 
+<script type='text/javascript' src='https://cdn.trakteer.id/js/embed/trbtn.min.js'></script><script type='text/javascript'>(function(){var trbtnId=trbtn.init('Support Me at Trakteer','#1E8DBE','https://trakteer.id/ajikamaludin','https://cdn.trakteer.id/images/mix/coffee.png','40');trbtn.draw(trbtnId);})();</script>
+
 # Getting started
 
 ## Installation
