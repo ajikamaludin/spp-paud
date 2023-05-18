@@ -60,7 +60,7 @@ You can now access the server at http://localhost:8000
 ----------
 # Default SuperUser
 
-Default Email : [demo link](http://app01.ajikamaludin.id)
+Default Email : [demo link](http://spp-paud.ajikamaludin.id)
 
     admin@example.com 
 
