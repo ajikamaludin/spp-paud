@@ -8,18 +8,17 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.1",
-        "laravel/framework": "^10.48.22",
+        "php": "^8.2",
+        "laravel/framework": "^11.23.5",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5.2",
         "maatwebsite/excel": "^3.1.58",
         "php-flasher/flasher-laravel": "^1.15.14"
     },
     "require-dev": {
-        "beyondcode/laravel-dump-server": "^1.9",
+        "beyondcode/laravel-dump-server": "^2.0",
         "filp/whoops": "^2.15.4",
-        "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^7.10",
+        "nunomaduro/collision": "^8.4",
         "phpunit/phpunit": "^10.5.35"
     },
     "config": {
