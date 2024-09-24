@@ -15,7 +15,7 @@ class KelasController extends Controller
      */
     public function index()
     {
-        $kelas = Kelas::orderBy('created_at','desc')->paginate(10);
+        $kelas = Kelas::orderBy('created_at', 'desc')->paginate(2);
         return view('kelas.index', ['kelas' => $kelas]);
     }
 
@@ -43,12 +43,12 @@ class KelasController extends Controller
             'nama' => 'required|max:255',
         ]);
 
-        if(Kelas::create($request->input())){
+        if (Kelas::create($request->input())) {
             return redirect()->route('kelas.index')->with([
                 'type' => 'success',
                 'msg' => 'Kelas ditambahkan'
             ]);
-        }else{
+        } else {
             return redirect()->route('kelas.index')->with([
                 'type' => 'danger',
                 'msg' => 'Err.., Terjadi Kesalahan'
@@ -85,12 +85,12 @@ class KelasController extends Controller
             'nama' => 'required|max:255',
         ]);
 
-        if($kelas->fill($request->input())->save()){
+        if ($kelas->fill($request->input())->save()) {
             return redirect()->route('kelas.index')->with([
                 'type' => 'success',
                 'msg' => 'Kelas diubah'
             ]);
-        }else{
+        } else {
             return redirect()->route('kelas.index')->with([
                 'type' => 'danger',
                 'msg' => 'Err.., Terjadi Kesalahan'
@@ -106,18 +106,18 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas)
     {
-        if($kelas->siswa->count() != 0){
+        if ($kelas->siswa->count() != 0) {
             return redirect()->route('kelas.index')->with([
                 'type' => 'danger',
                 'msg' => 'Tidak dapat menghapus kelas yang memiliki siswa'
             ]);
         }
-        if($kelas->delete()){
+        if ($kelas->delete()) {
             return redirect()->route('kelas.index')->with([
                 'type' => 'success',
                 'msg' => 'Kelas dihapus'
             ]);
-        }else{
+        } else {
             return redirect()->route('kelas.index')->with([
                 'type' => 'danger',
                 'msg' => 'Err.., Terjadi Kesalahan'
