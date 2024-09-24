@@ -38,6 +38,11 @@ Start the local development server
 
 You can now access the server at http://localhost:8000
 
+```bash
+php artisan --version
+# Laravel Framework 11.23.5
+```
+
 # Code overview
 
 ## Folders
