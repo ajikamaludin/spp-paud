@@ -9,10 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "laravel/framework": "^11.32.0",
+        "laravel/framework": "^11.34.2",
         "laravel/tinker": "^2.10",
-        "laravel/ui": "^4.5.2",
-        "maatwebsite/excel": "^3.1.60",
+        "laravel/ui": "^4.6.0",
+        "maatwebsite/excel": "^3.1.61",
         "php-flasher/flasher-laravel": "^1.15.14"
     },
     "require-dev": {
